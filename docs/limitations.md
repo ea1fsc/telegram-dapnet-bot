@@ -52,4 +52,3 @@ Honest list of what version **0.1.0** does not do, and behavioural constraints t
 - Admins see Nextcloud URL + username on signup (not the password).
 - Plain-text Telegram (by design).
 - SQLite file is the entire state; concurrent hosts pointing at the same DB file over NFS are unsupported.
-- CalDAV TLS: no per-user CA bundle. `CALDAV_SSL_VERIFY` and `CALDAV_CA_BUNDLE` apply to **every** Nextcloud URL. Origin CA is not trusted unless the operator sets the bundle. There is no setting to pin a single hostname.

@@ -65,7 +65,7 @@ Tap **Done** when **at least one** RIC is selected.
 2. **Username** — your Nextcloud login name.
 3. **App password** — paste it. The bot tries to **delete** that message from the chat so it does not stay on screen. If deletion fails (Telegram privacy settings), delete it yourself.
 
-The bot immediately tries to list calendars. If the URL, user, or password is wrong, it asks you to send another URL (or `/cancel`). TLS failures (`CERTIFICATE_VERIFY_FAILED`) are an **operator** problem on the bot host (Origin CA / proxy), not a bad app password. Ask the operator; see [Troubleshooting](troubleshooting.md).
+The bot immediately tries to list calendars. If the URL, user, or password is wrong, it asks you to send another URL (or `/cancel`).
 
 ### After submit
 

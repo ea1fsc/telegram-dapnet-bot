@@ -42,8 +42,6 @@ Short definitions for people who have not used DAPNET, CalDAV, or Telegram bots 
 
 **App password** — a long password Nextcloud generates for a single app (Settings → Security). Prefer this over the account password, especially with 2FA.
 
-**Cloudflare Origin CA** — a certificate authority Cloudflare uses **between** `cloudflared` and your origin (Nginx Proxy Manager, etc.). Browsers never see it; they see Cloudflare’s public edge certificate. Python does not trust Origin CA unless `CALDAV_CA_BUNDLE` points at `certs/cloudflare-origin-ca.pem` (Cloudflare’s public roots, not a private key).
-
 **Lead time** — how far **before** the event the first reminder fires (15 minutes up to 1 week).
 
 **Repeat count** — how many equally spaced alerts fire **before** the event (1, 2, or 3). The bot **always** adds one more alert **at event time** (T-0).

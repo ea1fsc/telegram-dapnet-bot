@@ -51,7 +51,7 @@ The bot could not list calendars.
 - Use an **app password** (Settings → Security), especially with 2FA.
 - URL should be the Nextcloud origin (`https://cloud.example.org`). The bot appends `/remote.php/dav` if needed.
 - Username is the Nextcloud login, not an email alias unless that **is** the login.
-- TLS errors (`CERTIFICATE_VERIFY_FAILED`, “self-signed certificate”): see [CalDAV TLS verification failed](#caldav-tls-verification-failed).
+- Self-signed TLS can fail depending on the host’s CA store.
 - CalDAV-compatible servers other than Nextcloud may work but are not a separate product mode.
 
 ## Approved but nothing is paged
@@ -95,26 +95,9 @@ Default grace is **30 minutes**. Due times older than that are skipped. There is
 
 `ENCRYPTION_KEY` does not match the key used when the user registered. Restore the old key or ask users to `/register` again (same callsign stays approved).
 
-## CalDAV TLS verification failed
-
-The handshake failed before HTTP. Rate limits (429) are not this error.
-
-Python verifies against **public** CAs. That works for Let’s Encrypt and for Cloudflare’s **edge** certificate (Google Trust Services / similar). It fails when the bot talks to the **origin** (Nginx Proxy Manager, Nextcloud HTTPS) and the cert is Cloudflare Origin CA or a true self-signed leaf. OpenSSL often reports Origin CA as “self-signed certificate” because that root is self-signed.
-
-Typical homelab: Internet → Cloudflare tunnel → NPM (Origin CA) → Nextcloud. Browsers see the edge cert. A Docker bot on the same host as NPM often hairpins to NPM and sees Origin CA.
-
-1. In the process log, find `CalDAV TLS peer for …`.
-2. Issuer `Google Trust Services` / `WE1` and Cloudflare anycast IPs (`188.114…`, `104.…`) → you are on the edge; the bundle should not be required.
-3. Issuer `CloudFlare Origin SSL` or a private IP → origin proxy. Set `CALDAV_CA_BUNDLE=/app/certs/cloudflare-origin-ca.pem` (venv: `./certs/cloudflare-origin-ca.pem`) and rebuild/restart. That file is Cloudflare’s **public** Origin CA roots, not a private key. [CalDAV TLS](configuration.md#caldav-tls).
-4. Do not set `CALDAV_SSL_VERIFY=false` unless you accept man-in-the-middle risk on every user’s CalDAV URL.
-
-Leaving both TLS variables unset is the old behaviour (public CAs only).
-
 ## CalDAV error messages in Telegram
 
 Background sync could not read Nextcloud. App password rotated? URL changed? User should `/register` with new credentials.
-
-If the message mentions TLS / Origin CA, it is an operator setting on the bot host, not a wrong app password. See the section above.
 
 ## Docker database disappeared
 

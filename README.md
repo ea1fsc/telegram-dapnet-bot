@@ -111,8 +111,6 @@ Common optionals (defaults in `.env.example`):
 | `DEFAULT_LEAD_MINUTES` | `60` | New-user lead time |
 | `DEFAULT_REPEAT_COUNT` | `1` | New-user repeat count (before T-0) |
 | `LOG_LEVEL` | `INFO` | Logging level |
-| `CALDAV_SSL_VERIFY` | `true` | Verify Nextcloud TLS certificates (omit for the old default) |
-| `CALDAV_CA_BUNDLE` | empty | Extra PEM merged with public CAs; use `/app/certs/cloudflare-origin-ca.pem` for Cloudflare Origin CA on the origin proxy |
 
 ### 5. Run the bot
 
@@ -130,7 +128,7 @@ cp .env.example .env
 docker compose up --build -d
 ```
 
-SQLite lives in `./data` on the host (`./data:/app/data`). Compose also mounts `./certs` read-only (`/app/certs`) for the bundled Cloudflare Origin CA roots. If the bot reaches Nginx Proxy Manager (or similar) with an Origin CA certificate instead of Cloudflare’s edge, set `CALDAV_CA_BUNDLE=/app/certs/cloudflare-origin-ca.pem`. Leave it unset for Let’s Encrypt / public CAs. Details: [CalDAV TLS](docs/configuration.md#caldav-tls).
+SQLite lives in `./data` on the host (`./data:/app/data`).
 
 ## End-user setup (step by step)
 
@@ -247,7 +245,7 @@ There is no JobQueue persistence. After a restart, the grace window avoids flood
 
 CalDAV `search(..., event=True, expand=True)`. `STATUS:CANCELLED` is ignored. Recurring instances are one cache row each. Turning a calendar **OFF** deletes its cached events.
 
-This is **poll**, not CalDAV webhooks. If CalDAV auth fails, the user gets a Telegram error (not a pager). TLS uses public CAs unless the operator sets `CALDAV_CA_BUNDLE` ([CalDAV TLS](docs/configuration.md#caldav-tls)).
+This is **poll**, not CalDAV webhooks. If CalDAV auth fails, the user gets a Telegram error (not a pager).
 
 ## DAPNET
 
@@ -274,7 +272,6 @@ DMR IDs above 2097151 have the first digit stripped so they fit the POCSAG RIC r
 
 - SQLite + SQLAlchemy async (`aiosqlite`). No Alembic; new `users` columns are added in `db/session.py` (`dapnet_rics`, `dapnet_server`). New tables (`rics`, `user_rics`) are created with `create_all`. Old `users.dapnet_rics` CSV values are backfilled into `user_rics` on startup.
 - Nextcloud app passwords: Fernet (`ENCRYPTION_KEY`).
-- CalDAV TLS is verified by default against public CAs. `certs/cloudflare-origin-ca.pem` is Cloudflare’s **public** Origin CA roots (not a private certificate). Point `CALDAV_CA_BUNDLE` at it only if the bot talks to an origin proxy that uses those certs.
 - Do not log app passwords or `DAPNET_PASSWORD`.
 - Do not commit `.env`, `data/`, or `*.db`.
 - Telegram messages never use Markdown.
@@ -292,7 +289,6 @@ src/telegram_dapnet_bot/
   bot/                 # Telegram handlers
   db/                  # models, repo, SQLite
   services/            # DAPNET, CalDAV, RadioID, reminders
-certs/                 # public Cloudflare Origin CA roots (optional CALDAV_CA_BUNDLE)
 tests/                 # unit tests (pytest)
 ```
 
@@ -311,7 +307,6 @@ pytest
 - No extra “Telegram only” channel separate from DAPNET timing; both fire on the same offsets.
 - SQLite only (no Postgres). No CalDAV push. No Alembic.
 - Recurrence expansion depends on python-caldav 3.x `search(..., expand=True)`.
-- Cloudflare Origin CA on the origin proxy is not trusted unless `CALDAV_CA_BUNDLE` is set.
 
 ## License
 

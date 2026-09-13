@@ -85,12 +85,6 @@ A named set of DAPNET transmitters (`all`, `ea-all`, …). Wrong names can drop 
 **Why `/test` works but calendar pages do not?**  
 Calendars still OFF, no events in the fetch window, or reminder time not reached yet. `/refresh` and `/calendars`.
 
-**CalDAV says `CERTIFICATE_VERIFY_FAILED` / self-signed certificate.**  
-The bot is verifying TLS against public CAs. Cloudflare **edge** certificates are public; a **Cloudflare Origin CA** certificate on Nginx Proxy Manager is not. Set `CALDAV_CA_BUNDLE` to the bundled public Origin CA roots (`/app/certs/cloudflare-origin-ca.pem` in Docker). Unset, the bot behaves as before. [CalDAV TLS](configuration.md#caldav-tls), [Troubleshooting](troubleshooting.md).
-
-**Is `certs/cloudflare-origin-ca.pem` a private certificate?**  
-No. It is Cloudflare’s published Origin CA **roots** (RSA + ECC), the same files as [Origin CA](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/). There is no private key. They only let the bot **verify** origin certificates. Your NPM origin cert and its key stay on the proxy.
-
 ## Something else
 
 See [Troubleshooting](troubleshooting.md) and [Limitations](limitations.md).

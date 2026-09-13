@@ -89,7 +89,6 @@ What this does:
 - Builds an image from `python:3.12-slim`
 - Starts `python -m telegram_dapnet_bot`
 - Mounts `./data` on the host to `/app/data` in the container so SQLite survives rebuilds
-- Mounts `./certs` read-only at `/app/certs` (public Cloudflare Origin CA roots)
 - Restarts the container unless you stop it (`restart: unless-stopped`)
 
 Useful commands:
@@ -102,8 +101,6 @@ docker compose up --build -d  # rebuild after a git pull
 ```
 
 `DATABASE_URL` in `.env.example` is `sqlite+aiosqlite:///./data/bot.db`. Inside the container the working directory is `/app`, so the file appears on the host as `./data/bot.db`. Keep that path; do not point it at a location outside `/app/data` or the volume will not contain the database.
-
-If Nextcloud sits behind a Cloudflare tunnel and Nginx Proxy Manager uses a **Cloudflare Origin CA** certificate, the bot may see that origin cert instead of Cloudflare’s public edge certificate. Set `CALDAV_CA_BUNDLE=/app/certs/cloudflare-origin-ca.pem` (venv: `./certs/cloudflare-origin-ca.pem`). Leave it unset when Nextcloud uses Let’s Encrypt or another public CA. See [CalDAV TLS](configuration.md#caldav-tls).
 
 ## After it is running
 

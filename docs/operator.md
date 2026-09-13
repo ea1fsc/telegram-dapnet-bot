@@ -86,7 +86,6 @@ Logs at `INFO` include:
 - application start (python-telegram-bot / httpx noise is reduced);
 - `DAPNET POST /calls …` when a reminder or `/test` fires;
 - `Reminded CALLSIGN for … offset=… dapnet=… telegram=…`.
-- on CalDAV TLS failure: `CalDAV TLS peer for host: dns=… subject=… issuer=…`.
 
 In Telegram:
 
@@ -132,4 +131,3 @@ Non-admins who type `/approve` receive the same “I do not know that command”
 - Not publishing `.env` or `data/`.
 - Telling users the bot `@username`, that they need a DAPNET subscriber, and that they must use a Nextcloud **app password**.
 - Approving only people you trust: their calendars are fetched with credentials stored on **your** server.
-- CalDAV TLS: public certificates work with no extra `.env`. If the bot host reaches Nextcloud via Nginx Proxy Manager (or similar) with a **Cloudflare Origin CA** certificate, set `CALDAV_CA_BUNDLE` as in [CalDAV TLS](configuration.md#caldav-tls). That PEM is Cloudflare’s public Origin CA roots, not a private key.

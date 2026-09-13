@@ -1,5 +1,4 @@
 from functools import lru_cache
-from pathlib import Path
 
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -39,9 +38,6 @@ class Settings(BaseSettings):
 
     log_level: str = "INFO"
 
-    caldav_ssl_verify: bool = True
-    caldav_ca_bundle: str = ""
-
     @field_validator("dapnet_api_url", "dapnet_api_url_es")
     @classmethod
     def strip_trailing_slash(cls, value: str) -> str:
@@ -51,14 +47,6 @@ class Settings(BaseSettings):
     @classmethod
     def normalize_default_server(cls, value: str) -> str:
         return normalize_server(value)
-
-    @field_validator("caldav_ca_bundle")
-    @classmethod
-    def validate_ca_bundle(cls, value: str) -> str:
-        cleaned = value.strip()
-        if cleaned and not Path(cleaned).is_file():
-            raise ValueError(f"CALDAV_CA_BUNDLE is not a file: {cleaned}")
-        return cleaned
 
     @property
     def admin_ids(self) -> frozenset[int]:

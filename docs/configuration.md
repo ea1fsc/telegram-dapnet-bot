@@ -84,27 +84,6 @@ Applied on first `/register`. Re-registering **keeps** timezone, transmitter gro
 
 `httpx` and `httpcore` are forced to `WARNING` so HTTP chatter does not drown the log. DAPNET `POST /calls` is logged at INFO (destinations and groups, not passwords). Do not log `.env` or app passwords yourself.
 
-## CalDAV TLS
-
-The bot verifies HTTPS certificates when it talks to Nextcloud. **Omitting both variables keeps the previous behaviour:** public CAs only, verification on.
-
-| Variable | Default | Meaning |
-| --- | --- | --- |
-| `CALDAV_SSL_VERIFY` | `true` | Verify every user’s CalDAV URL. `false` skips checks (man-in-the-middle risk; last resort). |
-| `CALDAV_CA_BUNDLE` | empty | Extra PEM **merged** with the public CA store (Let’s Encrypt, Google Trust Services, …). Must exist at process start. Empty = public store only. |
-
-A certificate issued by **Cloudflare Origin CA** (typical on Nginx Proxy Manager behind a Cloudflare tunnel) is **not** in browsers or Python’s public store. `cloudflared` trusts it; the bot does not, unless you set:
-
-```env
-CALDAV_CA_BUNDLE=/app/certs/cloudflare-origin-ca.pem
-```
-
-That path is for Docker. From a venv use `./certs/cloudflare-origin-ca.pem`. The file is Cloudflare’s **published Origin CA roots** (RSA + ECC), not a private certificate or key. Source: [Cloudflare Origin CA](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/). Compose mounts `./certs` at `/app/certs`. Rebuild and restart after adding the variable.
-
-If the bot reaches Cloudflare’s **edge**, the public Universal SSL certificate already verifies and you do not need the bundle. You need it when the process (often a container on the same host as NPM) hairpins to the origin proxy.
-
-On a TLS failure the log line `CalDAV TLS peer for …` shows resolved IPs and the peer certificate issuer (`Google Trust Services` = edge, `CloudFlare Origin SSL` = NPM).
-
 ## Example `.env`
 
 ```env
@@ -132,10 +111,6 @@ DEFAULT_LEAD_MINUTES=60
 DEFAULT_REPEAT_COUNT=1
 
 LOG_LEVEL=INFO
-
-# Optional. Uncomment if the bot talks to an origin proxy with a Cloudflare Origin CA cert.
-# CALDAV_SSL_VERIFY=true
-# CALDAV_CA_BUNDLE=/app/certs/cloudflare-origin-ca.pem
 ```
 
 After editing `.env`, restart the process (or `docker compose up -d` after a change; Compose recreates the container when env_file changes on some setups — if in doubt, `docker compose down && docker compose up -d`).
