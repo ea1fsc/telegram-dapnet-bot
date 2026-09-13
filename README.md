@@ -4,6 +4,21 @@ Telegram bot that reads each user’s Nextcloud calendars (any instance) and sen
 
 An administrator must approve every registration. The Telegram UI is English, plain text (no Markdown). Package version **0.1.0**. License **GPL-3.0-or-later**.
 
+## Documentation
+
+Step-by-step guides (English) live in [`docs/`](docs/README.md):
+
+| Guide | Audience |
+| --- | --- |
+| [Getting started](docs/getting-started.md) · [Glossary](docs/glossary.md) | Anyone new to the project |
+| [Installation](docs/installation.md) · [Configuration](docs/configuration.md) · [Operator guide](docs/operator.md) | Person who hosts the bot |
+| [Administrator guide](docs/administrator.md) | Who approves registrations |
+| [User guide](docs/user-guide.md) · [Command reference](docs/commands.md) | People who receive pages |
+| [How it works](docs/how-it-works.md) · [Security](docs/security.md) · [Limitations](docs/limitations.md) | Operators and reviewers |
+| [Troubleshooting](docs/troubleshooting.md) · [FAQ](docs/faq.md) | When something fails |
+
+This README is a short overview. Prefer the docs folder if you are installing or using the bot for the first time.
+
 ## How it works
 
 1. A ham registers in Telegram: DAPNET callsign, Spain/Germany core, destination RICs, Nextcloud URL + username + app password.
