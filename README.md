@@ -6,7 +6,7 @@ An administrator must approve every registration. The Telegram UI is English, pl
 
 ## Documentation
 
-Step-by-step guides (English) live in [`docs/`](docs/README.md):
+Step-by-step guides (English) live in [`docs/`](docs/):
 
 | Guide | Audience |
 | --- | --- |

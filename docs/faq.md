@@ -87,4 +87,4 @@ Calendars still OFF, no events in the fetch window, or reminder time not reached
 
 ## Something else
 
-See [Troubleshooting](troubleshooting.md), [Limitations](limitations.md), and the [documentation index](README.md).
+See [Troubleshooting](troubleshooting.md) and [Limitations](limitations.md).
