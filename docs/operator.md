@@ -131,5 +131,3 @@ Non-admins who type `/approve` receive the same “I do not know that command”
 - Not publishing `.env` or `data/`.
 - Telling users the bot `@username`, that they need a DAPNET subscriber, and that they must use a Nextcloud **app password**.
 - Approving only people you trust: their calendars are fetched with credentials stored on **your** server.
-
-PagerBot in `PagerBot/` is historical reference. Do not run it as the product.

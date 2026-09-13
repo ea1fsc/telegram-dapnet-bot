@@ -14,7 +14,6 @@ Honest list of what version **0.1.0** does not do, and behavioural constraints t
 - **No i18n** — Telegram UI is English only.
 - **No Telegram webhooks** — long polling only.
 - **No group-chat** workflow, topics, or channel posting.
-- `PagerBot/` in the repository is **reference**, not a supported second product.
 
 ## DAPNET API 1.1 constraints
 
@@ -53,7 +52,3 @@ Honest list of what version **0.1.0** does not do, and behavioural constraints t
 - Admins see Nextcloud URL + username on signup (not the password).
 - Plain-text Telegram (by design).
 - SQLite file is the entire state; concurrent hosts pointing at the same DB file over NFS are unsupported.
-
-## Comparison with historic PagerBot
-
-The rewrite does **not** aim for feature-parity with `PagerBot/`. Missing on purpose: free-form send, listener-side features, and anything that is not “calendar → approved user → DAPNET + Telegram reminder”.

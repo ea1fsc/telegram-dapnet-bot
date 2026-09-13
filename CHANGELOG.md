@@ -7,7 +7,7 @@ and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html)
 
 ## [0.1.0] - 2026-09-13
 
-First release of **telegram-dapnet-bot**: a Telegram bot that syncs per-user Nextcloud CalDAV calendars and sends DAPNET pages (API 1.1) plus Telegram reminders. `PagerBot/` is kept only as historical reference and is not the product.
+First release of **telegram-dapnet-bot**: a Telegram bot that syncs per-user Nextcloud CalDAV calendars and sends DAPNET pages (API 1.1) plus Telegram reminders.
 
 ### Added
 
@@ -52,7 +52,7 @@ First release of **telegram-dapnet-bot**: a Telegram bot that syncs per-user Nex
 - `/txgroup`: multiple transmitter groups (CSV), presets `all`, `ea-all`, `dl-all`, `us-all`, refresh from `GET /transmitterGroups`.
 - `/server`: Spain (`dapnet.es`) or Germany (`hampager.de`); aliases `es`/`de`/`ea`/`1`.
 - `/timezone`, `/test`.
-- Page text: `{CALLSIGN}: {sanitised summary} {dd/mm[ HH:MM]}`, max 80 characters (PagerBot-style sanitisation).
+- Page text: `{CALLSIGN}: {sanitised summary} {dd/mm[ HH:MM]}`, max 80 characters, sanitised for POCSAG.
 - HTTP retries on 429 / 5xx. Operator Basic auth. No DAPNET API 2.0.
 
 #### Telegram UI

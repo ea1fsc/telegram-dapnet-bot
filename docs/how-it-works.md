@@ -104,7 +104,7 @@ Tables:
 
 On startup, CSV values in `users.dapnet_rics` are backfilled into `user_rics` if needed.
 
-RadioID: `https://radioid.net/api/dmr/user/?callsign=…`. Network errors do **not** block registration; you simply get fewer suggestions. DMR IDs above 2097151 lose the first digit to fit POCSAG (same rule as historic PagerBot).
+RadioID: `https://radioid.net/api/dmr/user/?callsign=…`. Network errors do **not** block registration; you simply get fewer suggestions. DMR IDs above 2097151 lose the first digit to fit POCSAG.
 
 ## Project modules (operators / developers)
 

@@ -39,7 +39,6 @@ telegram-dapnet-bot/
   docs/                      # This documentation
   src/telegram_dapnet_bot/   # The product
   tests/                     # pytest unit tests
-  PagerBot/                  # Historical reference only — not the product
   .env.example               # Template for secrets and settings
   docker-compose.yml
 ```

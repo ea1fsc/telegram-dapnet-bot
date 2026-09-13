@@ -7,9 +7,6 @@ Short answers. Deeper detail lives in the linked pages.
 **What does this bot do?**  
 It reads your Nextcloud calendars and, before each event, sends a short DAPNET page and a Telegram message. An admin must approve you first. [Getting started](getting-started.md)
 
-**Is this PagerBot?**  
-No. `PagerBot/` in the repo is old reference code. The product is `telegram-dapnet-bot` (package `telegram_dapnet_bot`).
-
 **Do I need to be a radio amateur?**  
 End users need a DAPNET callsign and a pager (RIC). The operator needs a DAPNET account that can send calls.
 

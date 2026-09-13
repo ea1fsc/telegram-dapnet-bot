@@ -266,7 +266,7 @@ An invalid transmitter group name can cause DAPNET to drop the **whole** call. A
 
 The `pagers` array on `GET /callSigns/{cs}` is often hidden for non-admin operators. Then existence of the callsign is enough at register time; RadioID and the user’s RIC list are the practical pager identity.
 
-DMR IDs above 2097151 have the first digit stripped so they fit the POCSAG RIC range (same rule as PagerBot). RadioID network errors do not block registration.
+DMR IDs above 2097151 have the first digit stripped so they fit the POCSAG RIC range. RadioID network errors do not block registration.
 
 ## Data and security
 
@@ -274,7 +274,7 @@ DMR IDs above 2097151 have the first digit stripped so they fit the POCSAG RIC r
 - Nextcloud app passwords: Fernet (`ENCRYPTION_KEY`).
 - Do not log app passwords or `DAPNET_PASSWORD`.
 - Do not commit `.env`, `data/`, or `*.db`.
-- Telegram messages never use Markdown (PagerBot had too many parse failures).
+- Telegram messages never use Markdown.
 - `/delete` removes the user’s calendars, events, sent-reminder rows, RIC links, and encrypted Nextcloud secret. The shared RIC catalog (`rics`) stays so other users can still resolve that RIC.
 
 There is no automatic database backup. Copy `data/bot.db` yourself.
@@ -290,7 +290,6 @@ src/telegram_dapnet_bot/
   db/                  # models, repo, SQLite
   services/            # DAPNET, CalDAV, RadioID, reminders
 tests/                 # unit tests (pytest)
-PagerBot/              # REFERENCE. Not the product.
 ```
 
 Run tests:
