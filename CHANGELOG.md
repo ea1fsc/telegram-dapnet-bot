@@ -5,6 +5,18 @@ All notable changes to this project are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Optional CalDAV TLS settings `CALDAV_SSL_VERIFY` and `CALDAV_CA_BUNDLE`. When unset, verification is unchanged (`true`, public CA store only).
+- Bundled **public** Cloudflare Origin CA roots (RSA + ECC) at `certs/cloudflare-origin-ca.pem` ([Cloudflare Origin CA](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/)). No private keys. `CALDAV_CA_BUNDLE` merges that file with the public store so Cloudflare edge and an origin proxy (e.g. Nginx Proxy Manager) both verify.
+- On CalDAV TLS failure, log resolved IPs and the peer certificate subject/issuer (`CalDAV TLS peer for …`).
+
+### Changed
+
+- CalDAV TLS errors in Telegram now mention `CALDAV_CA_BUNDLE` instead of dumping the raw `HTTPSConnectionPool` traceback.
+
 ## [0.1.0] - 2026-09-13
 
 First release of **telegram-dapnet-bot**: a Telegram bot that syncs per-user Nextcloud CalDAV calendars and sends DAPNET pages (API 1.1) plus Telegram reminders.

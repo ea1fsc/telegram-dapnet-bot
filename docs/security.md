@@ -60,6 +60,8 @@ The process connects outbound to:
 
 It does not require inbound ports. CalDAV URLs are restricted to `http` and `https` (`file:` is rejected).
 
+TLS certificates are verified by default against the public CA store. Unset `CALDAV_SSL_VERIFY` / `CALDAV_CA_BUNDLE` keeps that behaviour. `certs/cloudflare-origin-ca.pem` contains Cloudflare’s **public** Origin CA roots ([documentation](https://developers.cloudflare.com/ssl/origin-configuration/origin-ca/)); it is not a private certificate and includes no private key. Point `CALDAV_CA_BUNDLE` at it when the bot reaches an origin proxy that uses Origin CA. `CALDAV_SSL_VERIFY=false` disables verification for **every** CalDAV URL and should only be used on a private network.
+
 ## Operator hygiene
 
 - Run as an unprivileged user.

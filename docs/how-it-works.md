@@ -82,6 +82,7 @@ Plain text, roughly:
 - Events without a UID are dropped.
 - Turning a calendar **OFF** deletes its cached events (so they will not page).
 - If CalDAV auth or network fails during the background sync, the user gets a Telegram error (not a pager message): *I could not read your Nextcloud calendars…*
+- HTTPS is verified against public CAs by default (same as before). A Cloudflare Origin CA certificate on the origin proxy needs `CALDAV_CA_BUNDLE`. TLS failures log `CalDAV TLS peer for …` (DNS + issuer).
 - `/refresh` reports how many calendars synced, names that failed, and up to 15 upcoming events.
 
 This is **not** instant. Default poll is 10 minutes. Very last-minute events may miss the first lead offset if they appear after that offset’s fire time; later offsets (including T-0) can still fire if the event is in cache and within grace.
@@ -116,6 +117,7 @@ src/telegram_dapnet_bot/
   bot/                 # Telegram handlers
   db/                  # models, repo, SQLite
   services/            # DAPNET, CalDAV, RadioID, reminders, format
+certs/                 # public Cloudflare Origin CA roots
 tests/
 ```
 

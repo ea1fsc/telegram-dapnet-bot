@@ -40,6 +40,7 @@ Do **not** expect a public paging gateway, a `/send` command, a POCSAG listener,
 - A Telegram account, so you can create a bot with [@BotFather](https://t.me/BotFather).
 - Your numeric Telegram user id (for example from [@userinfobot](https://t.me/userinfobot)).
 - A DAPNET operator account (callsign + password) that can `POST /calls`.
+- If Nextcloud is behind a Cloudflare tunnel and the origin proxy uses a **Cloudflare Origin CA** certificate, you may need `CALDAV_CA_BUNDLE` — [CalDAV TLS](configuration.md#caldav-tls). Public certificates need no extra setting.
 
 **If you are an end user**
 
