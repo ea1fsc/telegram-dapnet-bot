@@ -4,8 +4,6 @@ Telegram bot that reads each user’s Nextcloud calendars (any instance) and sen
 
 An administrator must approve every registration. The Telegram UI is English, plain text (no Markdown). Package version **0.1.0**. License **GPL-3.0-or-later**.
 
-This is not a free-form paging messenger. `PagerBot/` in this repo is **reference only** (historical `bot47.py`). Do not copy `/send`, POCSAG listeners, Postgres, i18n, or gifs from it.
-
 ## How it works
 
 1. A ham registers in Telegram: DAPNET callsign, Spain/Germany core, destination RICs, Nextcloud URL + username + app password.
